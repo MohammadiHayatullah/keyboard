@@ -1,24 +1,41 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-  background-color: #1e1e1e;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   flex-direction: column;
-    }
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 1s ease-in-out;
+}
 
-    
-.keyboard{
+.keyboard {
   display: flex;
   flex-direction: column;
+  background: linear-gradient(135deg, #112d3a, #1f3f4d); /* هماهنگ با body */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 .row {
   display: flex;
   justify-content: center;
@@ -28,15 +45,29 @@ body {
 .key {
   width: 40px;
   height: 40px;
-  border: 1px solid white;
+  border: 1px solid #00ffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: default;
-  transition: background-color 0.3s, transform 0.1s;
+  background-color: #000000;
+  color: #00ffff;
+  font-size: 18px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00ffff, inset 0 -2px 4px rgba(0, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.key:hover {
+  background-color: #001f1f;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffff;
 }
 
 .key.active {
   background-color: #00ff00;
+  box-shadow: 0 0 20px #00ff00;
   transform: scale(1.1);
 }
