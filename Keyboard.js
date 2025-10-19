@@ -1,49 +1,17 @@
 const keyboard = document.getElementById("keyboard");
 const textArea = document.getElementById("text-input");
 const audio = document.getElementById("keySound");
-
 let capsLock = false;
-//All the keys in a full PC keyboard layout
+
 const layout = [
-  [
-    "Esc",
-    "F1",
-    "F2",
-    "F3",
-    "F4",
-    "F5",
-    "F6",
-    "F7",
-    "F8",
-    "F9",
-    "F10",
-    "F11",
-    "F12",
-    "Del",
-  ],
-  [
-    "`",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
-    "-",
-    "=",
-    "Backspace",
-  ],
-  ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
-  ["CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
-  ["Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "Shift"],
-  ["Ctrl", "Alt", "Space", "Alt", "Ctrl"],
+  ["Esc","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","Del"],
+  ["`","1","2","3","4","5","6","7","8","9","0","-","=","Backspace"],
+  ["Tab","Q","W","E","R","T","Y","U","I","O","P","[","]","\\"],
+  ["CapsLock","A","S","D","F","G","H","J","K","L",";","'","Enter"],
+  ["Shift","Z","X","C","V","B","N","M",",",".","/","Shift"],
+  ["Ctrl","Alt","Space","Alt","Ctrl"]
 ];
 
-//building the keys
 layout.forEach((row) => {
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
@@ -51,11 +19,9 @@ layout.forEach((row) => {
   row.forEach((key) => {
     const keyDiv = document.createElement("div");
     keyDiv.classList.add("key");
-    keyDiv.id = key.toUpperCase();
+    keyDiv.id = key.replaceAll(" ", "_").toUpperCase();
 
-    if (
-      ["Backspace", "Enter", "Shift", "CapsLock", "Space", "Tab"].includes(key)
-    ) {
+    if (["Backspace","Enter","Shift","CapsLock","Space","Tab"].includes(key)) {
       keyDiv.classList.add(key === "Space" ? "extra-wide" : "wide");
     }
 
@@ -67,7 +33,6 @@ layout.forEach((row) => {
   keyboard.appendChild(rowDiv);
 });
 
-//managing key presses
 function handleKey(key) {
   let cursor = textArea.selectionStart;
   let value = textArea.value;
@@ -104,20 +69,16 @@ function handleKey(key) {
   }
 
   playSound();
-  textArea.focus();
+  setTimeout(() => textArea.focus(), 0);
 }
 
-// Caps Lock visual toggle
 function toggleCapsLockVisual() {
   const capsKey = document.getElementById("CAPSLOCK");
-  if (capsKey) {
-    capsKey.classList.toggle("active");
-  }
+  if (capsKey) capsKey.classList.toggle("active");
 }
 
-//Controlling physical keyboard events
 document.addEventListener("keydown", (event) => {
-  const key = event.key.toUpperCase();
+  const key = event.key.toUpperCase().replaceAll(" ", "_");
   const keyElement = document.getElementById(key);
   if (keyElement) keyElement.classList.add("active");
   if (event.key === "CapsLock") {
@@ -128,13 +89,12 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("keyup", (event) => {
-  const key = event.key.toUpperCase();
+  const key = event.key.toUpperCase().replaceAll(" ", "_");
   const keyElement = document.getElementById(key);
   if (keyElement) keyElement.classList.remove("active");
 });
 
-//Sound play function
 function playSound() {
   audio.currentTime = 0;
-  audio.play();
+  audio.play().catch(() => {});
 }
