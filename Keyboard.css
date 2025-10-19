@@ -18,6 +18,7 @@ body {
 
 h2 {
   margin-bottom: 15px;
+  text-align: center;
 }
 
 textarea {
@@ -32,6 +33,7 @@ textarea {
   margin-bottom: 20px;
   outline: none;
   resize: none;
+  height: 150px;
 }
 
 .keyboard {
@@ -44,6 +46,7 @@ textarea {
   gap: 8px;
   width: 95%;
   max-width: 900px;
+  overflow-x: auto;
 }
 
 .row {
@@ -65,8 +68,8 @@ textarea {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: 0.2s;
   user-select: none;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   box-shadow: 0 0 10px rgba(0,255,255,0.3);
 }
 
@@ -83,11 +86,9 @@ textarea {
   transform: scale(1.1);
 }
 
-/* Special keys size */
 .key.wide { width: 80px; }
 .key.extra-wide { width: 200px; }
 
-/* Responsive */
 @media (max-width: 768px) {
   .key { width: 35px; height: 40px; font-size: 14px; }
   .key.wide { width: 65px; }
@@ -95,7 +96,7 @@ textarea {
 }
 
 @media (max-width: 480px) {
-  textarea { font-size: 16px; }
+  textarea { font-size: 16px; height: 130px; }
   .key { width: 30px; height: 35px; font-size: 12px; }
   .key.wide { width: 60px; }
   .key.extra-wide { width: 120px; }

@@ -1,6 +1,7 @@
 const keyboard = document.getElementById("keyboard");
 const textArea = document.getElementById("text-input");
 const audio = document.getElementById("keySound");
+
 let capsLock = false;
 
 const layout = [
@@ -19,9 +20,9 @@ layout.forEach((row) => {
   row.forEach((key) => {
     const keyDiv = document.createElement("div");
     keyDiv.classList.add("key");
-    keyDiv.id = key.replaceAll(" ", "_").toUpperCase();
+    keyDiv.id = key.toUpperCase();
 
-    if (["Backspace","Enter","Shift","CapsLock","Space","Tab"].includes(key)) {
+    if (["Backspace", "Enter", "Shift", "CapsLock", "Space", "Tab"].includes(key)) {
       keyDiv.classList.add(key === "Space" ? "extra-wide" : "wide");
     }
 
@@ -69,7 +70,7 @@ function handleKey(key) {
   }
 
   playSound();
-  setTimeout(() => textArea.focus(), 0);
+  textArea.focus();
 }
 
 function toggleCapsLockVisual() {
@@ -78,7 +79,7 @@ function toggleCapsLockVisual() {
 }
 
 document.addEventListener("keydown", (event) => {
-  const key = event.key.toUpperCase().replaceAll(" ", "_");
+  const key = event.key.toUpperCase();
   const keyElement = document.getElementById(key);
   if (keyElement) keyElement.classList.add("active");
   if (event.key === "CapsLock") {
@@ -89,12 +90,14 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("keyup", (event) => {
-  const key = event.key.toUpperCase().replaceAll(" ", "_");
+  const key = event.key.toUpperCase();
   const keyElement = document.getElementById(key);
   if (keyElement) keyElement.classList.remove("active");
 });
 
 function playSound() {
-  audio.currentTime = 0;
-  audio.play().catch(() => {});
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play();
+  }
 }
