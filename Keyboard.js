@@ -3,28 +3,59 @@ const textArea = document.getElementById("text-input");
 const audio = document.getElementById("keySound");
 
 let capsLock = false;
-
-// تمام کلیدهای کیبورد
+//All the keys in a full PC keyboard layout
 const layout = [
-  ["Esc","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","Del"],
-  ["`","1","2","3","4","5","6","7","8","9","0","-","=","Backspace"],
-  ["Tab","Q","W","E","R","T","Y","U","I","O","P","[","]","\\"],
-  ["CapsLock","A","S","D","F","G","H","J","K","L",";","'","Enter"],
-  ["Shift","Z","X","C","V","B","N","M",",",".","/","Shift"],
-  ["Ctrl","Alt","Space","Alt","Ctrl"]
+  [
+    "Esc",
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10",
+    "F11",
+    "F12",
+    "Del",
+  ],
+  [
+    "`",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "0",
+    "-",
+    "=",
+    "Backspace",
+  ],
+  ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
+  ["CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
+  ["Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "Shift"],
+  ["Ctrl", "Alt", "Space", "Alt", "Ctrl"],
 ];
 
-// ساخت کلیدها
-layout.forEach(row => {
+//building the keys
+layout.forEach((row) => {
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
 
-  row.forEach(key => {
+  row.forEach((key) => {
     const keyDiv = document.createElement("div");
     keyDiv.classList.add("key");
     keyDiv.id = key.toUpperCase();
 
-    if (["Backspace","Enter","Shift","CapsLock","Space","Tab"].includes(key)) {
+    if (
+      ["Backspace", "Enter", "Shift", "CapsLock", "Space", "Tab"].includes(key)
+    ) {
       keyDiv.classList.add(key === "Space" ? "extra-wide" : "wide");
     }
 
@@ -36,7 +67,7 @@ layout.forEach(row => {
   keyboard.appendChild(rowDiv);
 });
 
-// تابع مدیریت تایپ
+//managing key presses
 function handleKey(key) {
   let cursor = textArea.selectionStart;
   let value = textArea.value;
@@ -76,7 +107,7 @@ function handleKey(key) {
   textArea.focus();
 }
 
-// فعال/غیرفعال کردن CapsLock بصری
+// Caps Lock visual toggle
 function toggleCapsLockVisual() {
   const capsKey = document.getElementById("CAPSLOCK");
   if (capsKey) {
@@ -84,7 +115,7 @@ function toggleCapsLockVisual() {
   }
 }
 
-// کنترل با کیبورد واقعی
+//Controlling physical keyboard events
 document.addEventListener("keydown", (event) => {
   const key = event.key.toUpperCase();
   const keyElement = document.getElementById(key);
@@ -102,7 +133,7 @@ document.addEventListener("keyup", (event) => {
   if (keyElement) keyElement.classList.remove("active");
 });
 
-// پخش صدا
+//Sound play function
 function playSound() {
   audio.currentTime = 0;
   audio.play();

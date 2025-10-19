@@ -9,27 +9,27 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-family: "Poppins", sans-serif;
+  justify-content: flex-start;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
 }
 
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 textarea {
-  width: 80%;
+  width: 90%;
   max-width: 700px;
-  height: 100px;
   background: #222;
   color: #fff;
   border: none;
   border-radius: 8px;
   padding: 10px;
   font-size: 18px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   outline: none;
   resize: none;
 }
@@ -37,51 +37,66 @@ textarea {
 .keyboard {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #112d3a, #1f3f4d);
-  padding: 20px;
+  background: #111;
+  padding: 15px;
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-  gap: 10px;
+  gap: 8px;
+  width: 95%;
+  max-width: 900px;
 }
 
 .row {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 5px;
 }
 
 .key {
-  width: 40px;
-  height: 40px;
+  height: 45px;
+  width: 45px;
+  background-color: #000;
   border: 1px solid #00ffff;
+  color: #00ffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000000;
-  color: #00ffff;
-  font-size: 18px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #00ffff, inset 0 -2px 4px rgba(0, 255, 255, 0.3);
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  font-weight: bold;
+  transition: 0.2s;
+  user-select: none;
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
 }
 
 .key:hover {
-  background-color: #001f1f;
+  background-color: #003333;
   transform: scale(1.05);
-  box-shadow: 0 0 15px #00ffff;
+  box-shadow: 0 0 10px #00ffff;
 }
 
 .key.active {
   background-color: #00ff00;
+  color: black;
   box-shadow: 0 0 20px #00ff00;
   transform: scale(1.1);
 }
 
-.key.wide {
-  width: 90px;
+/* Special keys size */
+.key.wide { width: 80px; }
+.key.extra-wide { width: 200px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .key { width: 35px; height: 40px; font-size: 14px; }
+  .key.wide { width: 65px; }
+  .key.extra-wide { width: 150px; }
 }
 
-.key.extra-wide {
-  width: 200px;
+@media (max-width: 480px) {
+  textarea { font-size: 16px; }
+  .key { width: 30px; height: 35px; font-size: 12px; }
+  .key.wide { width: 60px; }
+  .key.extra-wide { width: 120px; }
 }
